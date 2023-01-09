@@ -1,0 +1,64 @@
+<div class="row">
+
+  <div class="col-sm-6" *ngIf="deptoSelecionado">
+    <div class="row">
+      <div class="mr-auto">
+        <app-titulo [titulo]="'Cód. do Departamento: ' + deptoSelecionado.id"></app-titulo>
+      </div>
+      <div class="mt-1">
+        <button class="btn btn-sm btn-outline-danger" (click)="voltar()">Fechar</button>
+      </div>
+    </div>
+    
+    <form [formGroup]="deptoForm" (submit)="deptoSubmit()">
+      <div class="form-group">
+        <label for="formGroupExampleInput">Nome</label>
+        <input type="text" formControlName="nome" class="form-control">
+      </div>
+      <div class="form-group">
+        <hr>
+        <button class="btn btn-sm btn-success" [disabled]="!deptoForm.valid">Enviar</button>
+      </div>
+    </form>
+  </div>
+  
+  <div  [ngClass]="{'col-sm-6': deptoSelecionado,'col-sm-12': !deptoSelecionado}">
+    <app-titulo [titulo]="titulo"></app-titulo>
+  
+    <table class="table table-hover">
+      <thead class="table-secondary">
+        <tr>
+          <th scope="col">Visualizar</th>
+          <th scope="col">Id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Opções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let depto of deptos">
+          <td><button (click)="deptoSelect(depto)" class="btn btn-sm btn-warning">Detalhe</button></td>
+          <td scope="row">{{depto.id}}</td>
+          <td>{{depto.nome}}</td>
+          <td>
+            <div class="btn-group">
+              <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">Funcionários</button>
+              <button class="btn btn-sm btn-danger">Deletar</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<ng-template #template>
+  <div class="modal-body">
+    <app-funcionarios></app-funcionarios>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn pull-right" aria-label="Close"(click)="modalRef.hide()">FECHAR</button>
+  </div>
+</ng-template>
+
+
