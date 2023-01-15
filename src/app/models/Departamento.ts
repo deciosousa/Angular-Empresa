@@ -1,4 +1,9 @@
 export class Departamento {
-  id: Number;
-  nome: String;
+
+  constructor() {
+  this.id = 0;     
+  this.nome = '';
+  }
+  id: number;
+  nome: string;
 }

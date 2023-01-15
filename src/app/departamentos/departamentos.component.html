@@ -1,15 +1,10 @@
 <div class="row">
 
   <div class="col-sm-6" *ngIf="deptoSelecionado">
-    <div class="row">
-      <div class="mr-auto">
-        <app-titulo [titulo]="'Cód. do Departamento: ' + deptoSelecionado.id"></app-titulo>
-      </div>
-      <div class="mt-1">
-        <button class="btn btn-sm btn-outline-danger" (click)="voltar()">Fechar</button>
-      </div>
-    </div>
-    
+    <app-titulo [titulo]="(deptoSelecionado.id == 0 ? 'Novo Departamento' : 'Cód. Departamento: ' + deptoSelecionado.id)">
+      <button class="btn btn-sm btn-warning" (click)="voltar()">Lista de Departamentos</button>
+    </app-titulo>
+
     <form [formGroup]="deptoForm" (submit)="deptoSubmit()">
       <div class="form-group">
         <label for="formGroupExampleInput">Nome</label>
@@ -23,7 +18,9 @@
   </div>
   
   <div  [ngClass]="{'col-sm-6': deptoSelecionado,'col-sm-12': !deptoSelecionado}">
-    <app-titulo [titulo]="titulo"></app-titulo>
+    <app-titulo [titulo]="titulo">
+      <button class="btn btn-sm btn-success" (click)="deptoNovo()">Cadastrar Departamento</button>
+    </app-titulo>
   
     <table class="table table-hover">
       <thead class="table-secondary">
@@ -42,7 +39,7 @@
           <td>
             <div class="btn-group">
               <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">Funcionários</button>
-              <button class="btn btn-sm btn-danger">Deletar</button>
+              <button class="btn btn-sm btn-danger" (click)="deletarDepto(depto.id)">Deletar</button>
             </div>
           </td>
         </tr>

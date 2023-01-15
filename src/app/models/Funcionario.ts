@@ -1,6 +1,16 @@
+import { Departamento } from "./Departamento";
+
 export class Funcionario {
-  id: Number;
-  nome: String;
-  contratacao: string;
-  areaDepto: string;
+
+  constructor() {
+  this.id = 0;
+  this.nomeFunc = '';
+  this.dataContratacao = '';
+  this.nomeDepto = '';   
+  }
+  id: number;
+  nomeFunc: string;
+  dataContratacao: string;
+  nomeDepto: string;
+  deptoId: Departamento
 }
