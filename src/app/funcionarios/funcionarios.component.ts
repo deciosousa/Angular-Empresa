@@ -1,4 +1,4 @@
-import { ThisReceiver } from '@angular/compiler';
+//import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -43,7 +43,7 @@ export class FuncionariosComponent implements OnInit {
       nomeFunc: ['', Validators.required],
       dataContratacao: ['', Validators.required],
       nomeDepto: ['', Validators.required],
-      deptoId: ['']
+      //deptoId: ['']
     });
   }
   

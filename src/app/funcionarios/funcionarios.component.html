@@ -19,10 +19,6 @@
         <input type="text" formControlName="nomeDepto" class="form-control">
       </div>
       <div class="form-group">
-        <label for="formGroupExampleInput2">DepartamentoId</label>
-        <input type="text" formControlName="deptoId" class="form-control">
-      </div>
-      <div class="form-group">
         <hr>
         <button class="btn btn-sm btn-success" [disabled]="!funcionarioForm.valid">Enviar</button>
       </div>
@@ -42,7 +38,6 @@
         <th scope="col">Nome</th>
         <th scope="col">Data de Contratação</th>
         <th scope="col">Departamento</th>
-        <th scope="col">DepartamentoId</th>
         <th scope="col">Opções</th>
       </tr>
     </thead>
@@ -53,7 +48,6 @@
         <td>{{func.nomeFunc}}</td>
         <td>{{func.dataContratacao}}</td>
         <td>{{func.nomeDepto}}</td>
-        <td>{{func.deptoId}}</td>
         <td>
           <div class="btn-group">
             <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">Editar</button>

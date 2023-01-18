@@ -32,4 +32,6 @@ put(departamento: Departamento) {
 delete(id: number) {
   return this.http.delete(`${this.baseUrl}/${id}`);
 }
+
 }
+
