@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DepartamentosComponent } from './departamentos/departamentos.component';
-import { FuncionariosComponent } from './funcionarios/funcionarios.component';
+import { CriarDeptoComponent } from './Componentes/criarDepto/criarDepto.component';
+import { EditarDeptoComponent } from './Componentes/editarDepto/editarDepto.component';
+import { ListarDeptoComponent } from './Componentes/listarDepto/listarDepto.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'departamentos', component: DepartamentosComponent},
-  { path: 'funcionarios', component: FuncionariosComponent},
+  { path: 'criarDepto', component: CriarDeptoComponent},
+  { path: 'editarDepto', component: EditarDeptoComponent},
+  { path: 'listarDepto', component: ListarDeptoComponent},
+
 
 ];
 

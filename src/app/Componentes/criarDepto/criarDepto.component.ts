@@ -1,23 +1,22 @@
-//import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Departamento } from '../models/Departamento';
-import { DepartamentoService } from './departamento.service';
+import { Departamento } from 'src/app/models/Departamento';
+import { DepartamentoService } from 'src/app/departamento.service';
 import { Observable } from 'rxjs';
 
-
 @Component({
-  selector: 'app-departamentos', 
-  templateUrl: './departamentos.component.html' , 
-  styleUrls: ['./departamentos.component.css']
+  selector: 'app-criarDepto',
+  templateUrl: './criarDepto.component.html',
+  styleUrls: ['./criarDepto.component.css']
 })
-export class DepartamentosComponent implements OnInit {
+export class CriarDeptoComponent implements OnInit {
 
   public modalRef: BsModalRef;
   public deptoForm: FormGroup;
   public titulo = 'Departamentos';
   public deptoSelecionado: Departamento;
+
   public modo = 'post';
 
   public deptos: Departamento [];
@@ -54,7 +53,7 @@ export class DepartamentosComponent implements OnInit {
   }
 
   salvarDepto(departamento: Departamento): void {
-    (departamento.id != 0) ? this.modo = 'put' : this.modo = 'post';
+    //(departamento.id != 0) ? this.modo = 'put' : this.modo = 'post';
 
     this.departamentoService[this.modo](departamento).subscribe({
       next: (retorno: Departamento[]) => {
@@ -97,6 +96,3 @@ export class DepartamentosComponent implements OnInit {
     this.deptoSelecionado = null;
   }
 }
-
-
-

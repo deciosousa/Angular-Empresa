@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Departamento } from '../models/Departamento';
+import { Departamento } from '../app/models/Departamento';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +34,3 @@ delete(id: number) {
 }
 
 }
-
