@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { CriarDeptoComponent } from './Componentes/criarDepto/criarDepto.component';
 import { EditarDeptoComponent } from './Componentes/editarDepto/editarDepto.component';
 import { ListarDeptoComponent } from './Componentes/listarDepto/listarDepto.component';
+import { CriarFuncComponent } from './Componentes/criarFunc/criarFunc.component';
+import { EditarFuncComponent } from './Componentes/editarFunc/editarFunc.component';
+import { ListarFuncComponent } from './Componentes/listarFunc/listarFunc.component';
 import { NavComponent } from './Componentes/nav/nav.component';
 import { TituloComponent } from './Componentes/titulo/titulo.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -19,6 +22,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     CriarDeptoComponent,
     EditarDeptoComponent,
     ListarDeptoComponent,
+    CriarFuncComponent,
+    EditarFuncComponent,
+    ListarFuncComponent,
     NavComponent,
     TituloComponent
    ],
