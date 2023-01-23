@@ -1,9 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Funcionario } from 'src/app/models/Funcionario';
 import { FuncionarioService } from 'src/app/funcionario.service';
-import { Observable } from 'rxjs';
+
+// importes das classes necessárias para ler a variável da rota. Ex: editarDepto/1, editarDepto/3, editarDepto/5, etc.
+import { Subscription } from 'rxjs';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-editarFunc',
@@ -12,27 +14,35 @@ import { Observable } from 'rxjs';
 })
 export class EditarFuncComponent implements OnInit {
 
-  public modalRef: BsModalRef;
+  
   public funcionarioForm: FormGroup;
   public titulo = 'Funcionários';
   public funcSelecionado: Funcionario;
-  public modo = 'post';
 
   public funcs: Funcionario [];
-    
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
 
-  constructor(private fb: FormBuilder, 
-              private modalService: BsModalService,
-              private funcionarioService: FuncionarioService
-              ) {
+  private routeSub: Subscription;
+    
+
+  constructor(private fb: FormBuilder,
+              private funcionarioService: FuncionarioService,
+              // Criação da instância da classe ActivatedRoute, por meio da variável route.
+              private route: ActivatedRoute) {
                 this.criarForm();
               }
 
   ngOnInit() {
-    this.carregarFuncs();
+    
+    // this.routeSub = this.route.params.subscribe((params: Params): void => {
+      //A variável route criada na linha 30 possui a propriedade 'params', conforme a linha 40. A params é que tem as propriedades que estão na rota, editarDepto/1, editarDepto/3, editarDepto/5, etc. Para acessar essas variáveis da rota é preciso executar o subscribe da 'params'. O subscribe também possui o tipo 'Params' que foi definido na variável 'parametros'.
+    
+      this.route.params.subscribe((parametros: Params): void => {
+        //Na linha acima, da variável 'parametros' do tipo 'Params', é lida a variável da rota 'variavelId', que neste caso, é o próprio valor do Id: editarDepto/1, editarDepto/3, editarDepto/5 etc, que no caso é o 1, 3, 5 etc.
+        // Lembrando que para ver esse valor no browser, deve-se abrir o devTools/aba console.
+      console.log('parametros[variavelId]:' + parametros['variavelId']);
+      // o valor que foi lido da rota, será passado para o método 'carregarDeptos', desse modo, this.carregarDeptos(1), this.carregarDeptos(3), this.carregarDeptos(5).  
+      this.carregarFuncs(parametros['variavelId']);
+    });
   }
 
   criarForm() {
@@ -41,58 +51,34 @@ export class EditarFuncComponent implements OnInit {
       nomeFunc: ['', Validators.required],
       dataContratacao: ['', Validators.required],
       nomeDepto: ['', Validators.required],
-      //deptoId: ['']
     });
   }
+
+   // Adicionado aqui a variável idDoDepto do tipo 'number' para receber o id do departamento que foi passado pela rota editarDepto/1, editarDepto/3, editarDepto/5
   
-  carregarFuncs() {
-    this.funcionarioService.getAll().subscribe({
-      next: (funcionarios: Funcionario[]) => {
-          this.funcs = funcionarios;
+  carregarFuncs(idDoFunc: number) {
+    this.funcionarioService.getById(idDoFunc).subscribe({
+      next: (funcionarios: Funcionario) => {
+          this.funcSelecionado = funcionarios;
         },
         error: (error: any) => { } 
       });
   }
 
   salvarFunc(funcionario: Funcionario){
-    (funcionario.id != 0) ? this.modo = 'put' : this.modo = 'post';
 
-    this.funcionarioService[this.modo](funcionario).subscribe({ 
-      next: (retorno: Funcionario[]) => {
+    this.funcionarioService.put(funcionario).subscribe({ 
+      next: (retorno: Funcionario) => {
           console.log(retorno);
-          this.carregarFuncs();        
+          //this.carregarFuncs(idDoFunc);        
         },
         error: (error: any) => { } 
-      });
-  }
-
-  deletarFunc(id: number) {
-    this.funcionarioService.delete(id).subscribe({
-      next: (model: any) => {
-          console.log(model);
-          this.carregarFuncs();        
-        },
-        error: (error: any) => { 
-          console.log(error);
-          
-        } 
       });
   }
 
   funcSubmit() {
     console.log(this.funcionarioForm.value);
     this.salvarFunc(this.funcionarioForm.value);
-    this.carregarFuncs();
-  }
-
-  funcSelect(funcionario: Funcionario){
-    this.funcSelecionado = funcionario;
-    this.funcionarioForm.patchValue(funcionario);
-  }
-
-  funcNovo(){
-    this.funcSelecionado = new Funcionario();
-    this.funcionarioForm.patchValue(this.funcSelecionado);
   }
 
   voltar() {

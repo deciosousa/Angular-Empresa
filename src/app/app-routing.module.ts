@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'listarDepto', component: ListarDeptoComponent},
   { path: 'criarFunc', component: CriarFuncComponent },
   { path: 'editarFunc', component: EditarFuncComponent},
+  { path: 'editarFunc/:variavelId', component: EditarFuncComponent},
   { path: 'listarFunc', component: ListarFuncComponent},
 
 ];

@@ -2,71 +2,27 @@
 
   <div class="col-sm-6" *ngIf="funcSelecionado">
     <app-titulo [titulo]="(funcSelecionado.id == 0 ? 'Novo Funcionário' : 'Cód. Funcionário: ' + funcSelecionado.id)">
-      <button class="btn btn-sm btn-warning" (click)="voltar()">Lista de Funcionários</button>
+      <a [routerLink]="['/listarFunc']" class="btn btn-sm btn-warning">Lista de Funcionário</a>
     </app-titulo>
   
     <form [formGroup]="funcionarioForm" (submit)="funcSubmit()">
       <div class="form-group">
         <label for="formGroupExampleInput">Nome</label>
-        <input type="text" formControlName="nomeFunc" class="form-control">
+        <!-- inserido o atributo value para incluir a variável deptoSelecionado que está definida no TS. Deste modo o nome do Departamento é exibido na view  -->
+        <input type="text" class="form-control" value="{{funcSelecionado.nomeFunc}}">
       </div>
       <div class="form-group">
         <label for="formGroupExampleInput2">Data de Contratação</label>
-        <input type="text" formControlName="dataContratacao" class="form-control">
+        <input type="text"  class="form-control" value="{{funcSelecionado.dataContratacao}}">
       </div>
       <div class="form-group">
         <label for="formGroupExampleInput2">Departamento</label>
-        <input type="text" formControlName="nomeDepto" class="form-control">
+        <input type="text" class="form-control" value="{{funcSelecionado.nomeDepto}}">
       </div>
       <div class="form-group">
         <hr>
-        <button class="btn btn-sm btn-success" [disabled]="!funcionarioForm.valid">Enviar</button>
+        <button class="btn btn-sm btn-success" (click)="salvarFunc(funcSelecionado)">Enviar</button>
       </div>
     </form>
   </div>
   
-  <div [ngClass]="{'col-sm-6': funcSelecionado,'col-sm-12': !funcSelecionado}">
-  <app-titulo [titulo]="titulo">
-    <button class="btn btn-sm btn-success" (click)="funcNovo()">Cadastrar Funcionário</button>
-  </app-titulo>
-  
-  <table class="table table-hover">
-    <thead class="table-secondary">
-      <tr>
-        <th scope="col">Visualizar</th>
-        <th scope="col">Id</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Data de Contratação</th>
-        <th scope="col">Departamento</th>
-        <th scope="col">Opções</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let func of funcs">
-        <td><button (click)="funcSelect(func)" class="btn btn-sm btn-warning">Detalhe</button></td>
-        <td scope="row">{{func.id}}</td>
-        <td>{{func.nomeFunc}}</td>
-        <td>{{func.dataContratacao}}</td>
-        <td>{{func.nomeDepto}}</td>
-        <td>
-          <div class="btn-group">
-            <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">Editar</button>
-            <button class="btn btn-sm btn-danger" (click)="deletarFunc(func.id)">Deletar</button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-</div>
-
-  
-
-<ng-template #template>
-  <div class="modal-body">
-    <!-- <app-funcionarios></app-funcionarios> -->
-  </div>
-  <div class="modal-footer">
-      <button type="button" class="btn pull-right" aria-label="Close"(click)="modalRef.hide()">FECHAR</button>
-  </div>
-</ng-template>
