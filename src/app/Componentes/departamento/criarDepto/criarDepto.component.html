@@ -1,29 +1,35 @@
-<div class="row">
 
-  <div class="col-sm-6" *ngIf="deptoSelecionado">
-    <app-titulo [titulo]="(deptoSelecionado.id == 0 ? 'Novo Departamento' : 'Cód. Departamento: ' + deptoSelecionado.id)">
-      <button class="btn btn-sm btn-warning" (click)="voltar()">Lista de Departamentos</button>
+  <div class="row">
+  
+    <app-titulo [titulo]="(modo == 'post' ? 'Novo Departamento' : '')">
     </app-titulo>
+ 
 
-    <form [formGroup]="deptoForm" (submit)="deptoSubmit()">
+    <div class="mt-2">
+      <a routerLink="/listarDepto"routerLinkActive="active" class="btn btn-warning">voltar para lista</a>
+    </div>
+
+
+    <!-- <form [formGroup]="deptoForm" (submit)="deptoSubmit()"> -->
+    <form [formGroup]="deptoForm" (submit)="deptoSubmit()" >
       <div class="form-group">
         <label for="formGroupExampleInput">Nome</label>
         <input type="text" formControlName="nome" class="form-control">
       </div>
       <div class="form-group">
         <hr>
-        <button class="btn btn-sm btn-success" [disabled]="!deptoForm.valid">Enviar</button>
+        <button class="btn btn-sm btn-success" (click)="salvarDepto(depto)" [disabled]="!deptoForm.valid">Enviar</button>
       </div>
     </form>
   </div>
   
-  <div  [ngClass]="{'col-sm-6': deptoSelecionado,'col-sm-12': !deptoSelecionado}">
+  <!-- <div  [ngClass]="{'col-sm-6': deptoSelecionado,'col-sm-12': !deptoSelecionado}">
     <app-titulo [titulo]="titulo">
       <button class="btn btn-sm btn-success" (click)="deptoNovo()">Cadastrar Departamento</button>
-    </app-titulo>
+    </app-titulo> -->
   
 
-    <table class="table table-hover">
+    <!-- <table class="table table-hover">
       <thead class="table-secondary">
         <tr>
           <th scope="col">Visualizar</th>
@@ -49,12 +55,10 @@
   </div>
 </div>
 
-
-<ng-template #template>
+<! <ng-template #template>
   <div class="modal-body">
-    <!-- <app-funcionarios></app-funcionarios> -->
   </div>
   <div class="modal-footer">
       <button type="button" class="btn pull-right" aria-label="Close"(click)="modalRef.hide()">FECHAR</button>
   </div>
-</ng-template>
+</ng-template> -->

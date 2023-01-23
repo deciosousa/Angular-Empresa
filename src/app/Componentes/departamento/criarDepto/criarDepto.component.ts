@@ -5,6 +5,8 @@ import { Departamento } from 'src/app/models/Departamento';
 import { DepartamentoService } from 'src/app/departamento.service';
 import { Observable } from 'rxjs';
 
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 @Component({
   selector: 'app-criarDepto',
   templateUrl: './criarDepto.component.html',
@@ -19,6 +21,8 @@ export class CriarDeptoComponent implements OnInit {
 
   public modo = 'post';
 
+  public depto: Departamento;
+
   public deptos: Departamento [];
 
   openModal(template: TemplateRef<any>) {
@@ -32,7 +36,7 @@ export class CriarDeptoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.carregarDeptos();
+    this.criarForm();
   }
 
 
@@ -53,10 +57,10 @@ export class CriarDeptoComponent implements OnInit {
   }
 
   salvarDepto(departamento: Departamento): void {
-    //(departamento.id != 0) ? this.modo = 'put' : this.modo = 'post';
+    // (departamento.id != 0) ? this.modo = 'put' : this.modo = 'post';
 
-    this.departamentoService[this.modo](departamento).subscribe({
-      next: (retorno: Departamento[]) => {
+    this.departamentoService.post(departamento).subscribe({
+      next: (retorno: Departamento) => {
           console.log(retorno);
           this.carregarDeptos();        
         },
