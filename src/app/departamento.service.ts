@@ -25,7 +25,7 @@ post(departamento: Departamento) {
   return this.http.post(`${this.baseUrl}`, departamento);
 }
 
-put(departamento: Departamento) {
+put(id: number, departamento: Departamento) {
   return this.http.put(`${this.baseUrl}/${departamento.id}`, departamento);
 }
 

@@ -1,4 +1,4 @@
-  <div class="row">
+  <!-- <div class="row">
   
     <app-titulo [titulo]="(modo == 'post' ? 'Novo Departamento' : '')">
     </app-titulo>
@@ -9,7 +9,7 @@
     </div>
 
 
-    <!-- <form [formGroup]="deptoForm" (submit)="deptoSubmit()"> -->
+    <form [formGroup]="deptoForm" (submit)="deptoSubmit()">
     <form [formGroup]="deptoForm" (submit)="deptoNovo()" >
       <div class="form-group">
         <label for="formGroupExampleInput">Nome</label>
@@ -21,4 +21,27 @@
       </div>
     </form>
   </div>
+ -->
 
+ <div class = "container custom-container">
+  <div class = "col-md-12">
+    <h3 class = "mb-3 text-center">Criar Registro</h3>
+    
+    <div class = "form-group">
+      <input type = "text" [(ngModel)] = "dadosRegistro.nome" placeholder = "Insira seu nome" class = "form-control" />
+    </div>
+
+    <!-- <div class = "form-group">
+      <input type = "email" [(ngModel)] = "dadosRegistro.email" placeholder = "Insira seu email" class = "form-control" />
+    </div>
+
+    <div class = "form-group">
+      <input type = "text" [(ngModel)] = "dadosRegistro.phone" placeholder = "Insira o número de telefone" class = "form-control"/>
+    </div> -->
+
+    <div class = "form-group">
+      <button class = "btn btn-success btn-large btn-block" (click) = "inserirColaborador()"> Salvar Registro</button>
+    </div>
+
+  </div>
+</div>

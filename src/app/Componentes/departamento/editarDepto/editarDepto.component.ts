@@ -64,8 +64,9 @@ export class EditarDeptoComponent implements OnInit {
   }
 
   salvarDepto(departamento: Departamento) {
+ 
 
-    this.departamentoService.put(departamento).subscribe({
+    this.departamentoService.put(departamento.id, departamento).subscribe({
       next: (retorno: Departamento) => {
           console.log(retorno);
           //this.carregarDeptos(departamento.id);        
