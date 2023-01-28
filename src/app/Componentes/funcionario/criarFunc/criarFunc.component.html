@@ -1,29 +1,34 @@
 <div class="row">
-  <app-titulo [titulo]="(modo == 'post' ? 'Novo Funcionário' : '')">
-  </app-titulo>
-  <div class="mt-2">
-    <a routerLink="/listarFunc"routerLinkActive="active" class="btn btn-warning">voltar para lista</a>
+
+  <div class="d-flex flex-row justify-content-end mt-3">
+    <label for="">voltar</label>
+   <a [routerLink]="['/listarFunc']" class="btn btn-sm btn-white">
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+    </svg>
+   </a>
   </div>
-  
-  <form [formGroup]="funcionarioForm" (submit)="funcNovo()">
-    <div class="form-group">
-      <label for="formGroupExampleInput">Nome</label>
-      <input type="text" formControlName="nomeFunc" class="form-control">
+  <div class = "col-sm-11 d-flex justify-content-center">
+    <h4 class = "mb-3 mt-4 mb-4">Novo Funcionário</h4>
+  </div>
+  <div class="col-sm-12 mt-3 ">
+    <div class = "form-group col-sm-8 me-3">
+      <label for="">Nome Completo:</label>
+      <input type = "text" [(ngModel)] = "dadosRegistro.nomeFunc" class = "form-control" />
     </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Data de Contratação</label>
-      <input type="text" formControlName="dataContratacao" class="form-control">
+    <div class = "form-group col-sm-4 me-3">
+      <label for="">Data da contratação:</label>
+      <input type = "text" [(ngModel)] = "dadosRegistro.dataContratacao" class = "form-control" />
     </div>
-    
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Departamento</label>
-      <input type="text" formControlName="nomeDepto" class="form-control">
+    <div class="col-sm-12 mt-3 d-flex">
+      <div class = "form-group col-sm-4 me-3 ">
+        <label for="">Nome do departamento:</label>
+        <input type = "text" [(ngModel)] = "dadosRegistro.nomeDepto" placeholder = "Insira o nome do departamento" class = "form-control" />
+      </div>
+      <div class="d-flex ">
+        <button class = "btn btn-sm btn-dark" (click) = "cadastrarFunc()">Salvar</button> 
+      </div>
     </div>
-    <div class="form-group">
-      <hr>
-      <button class="btn btn-sm btn-success" (click)="salvarFunc(func)" [disabled]="!funcionarioForm.valid">Enviar</button>
-    </div>
-  </form>
+  </div>
 </div>
-  
 

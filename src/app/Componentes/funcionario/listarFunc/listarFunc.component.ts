@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Funcionario } from 'src/app/models/Funcionario';
 import { FuncionarioService } from 'src/app/funcionario.service';
 
@@ -9,8 +8,6 @@ import { FuncionarioService } from 'src/app/funcionario.service';
   styleUrls: ['./listarFunc.component.css']
 })
 export class ListarFuncComponent implements OnInit {
-
-  public titulo = 'Funcionários';
 
   public funcs: Funcionario [];
 
@@ -30,15 +27,16 @@ export class ListarFuncComponent implements OnInit {
   }
 
   deletarFunc(id: number) {
+
+    if(window.confirm('Confirma a exclusão do registro?'))
     this.funcionarioService.delete(id).subscribe({
       next: (model: any) => {
           console.log(model);
           this.carregarFuncs();        
         },
         error: (error: any) => { 
-          console.log(error);
-          
+          console.log(error);  
         } 
-      });
+    });
   }
 }

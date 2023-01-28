@@ -1,47 +1,25 @@
-  <!-- <div class="row">
-  
-    <app-titulo [titulo]="(modo == 'post' ? 'Novo Departamento' : '')">
-    </app-titulo>
- 
+<div class="row">
 
-    <div class="mt-2">
-      <a routerLink="/listarDepto"routerLinkActive="active" class="btn btn-warning">voltar para lista</a>
-    </div>
-
-
-    <form [formGroup]="deptoForm" (submit)="deptoSubmit()">
-    <form [formGroup]="deptoForm" (submit)="deptoNovo()" >
-      <div class="form-group">
-        <label for="formGroupExampleInput">Nome</label>
-        <input type="text" formControlName="nome" class="form-control">
-      </div>
-      <div class="form-group">
-        <hr>
-        <button class="btn btn-sm btn-success" (click)="salvarDepto(depto)" [disabled]="!deptoForm.valid">Enviar</button>
-      </div>
-    </form>
+  <div class="d-flex flex-row justify-content-end mt-3">
+    <label for="">voltar</label>
+   <a [routerLink]="['/listarDepto']" class="btn btn-sm btn-white">
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+    </svg>
+   </a>
   </div>
- -->
-
- <div class = "container custom-container">
-  <div class = "col-md-12">
-    <h3 class = "mb-3 text-center">Criar Registro</h3>
-    
-    <div class = "form-group">
-      <input type = "text" [(ngModel)] = "dadosRegistro.nome" placeholder = "Insira seu nome" class = "form-control" />
+  <div class = "col-sm-11 d-flex flex-row justify-content-center">
+    <h4 class = "mb-3 mt-4 mb-4">Novo Departamento</h4>
+  </div>
+  <div class="col-sm-12 mt-3 d-flex flex-row justify-content-center">
+    <div class = "form-group col-sm-4 me-3">
+      <input type = "text" [(ngModel)] = "dadosRegistro.nome" placeholder = "Insira o nome do Departamento" class = "form-control" />
     </div>
-
-    <!-- <div class = "form-group">
-      <input type = "email" [(ngModel)] = "dadosRegistro.email" placeholder = "Insira seu email" class = "form-control" />
+    <div>
+      <button class = "btn btn-md btn-dark" (click) = "cadastrarDepto()">Salvar</button> 
     </div>
-
-    <div class = "form-group">
-      <input type = "text" [(ngModel)] = "dadosRegistro.phone" placeholder = "Insira o número de telefone" class = "form-control"/>
-    </div> -->
-
-    <div class = "form-group">
-      <button class = "btn btn-success btn-large btn-block" (click) = "inserirColaborador()"> Salvar Registro</button>
-    </div>
-
   </div>
 </div>
+
+        
+  

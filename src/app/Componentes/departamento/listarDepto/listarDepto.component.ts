@@ -1,5 +1,4 @@
 import { Component, OnInit} from '@angular/core';
-
 import { Departamento } from 'src/app/models/Departamento';
 import { DepartamentoService } from 'src/app/departamento.service';
 
@@ -9,8 +8,6 @@ import { DepartamentoService } from 'src/app/departamento.service';
   styleUrls: ['./listarDepto.component.css']
 })
 export class ListarDeptoComponent implements OnInit {
-
-  public titulo = 'Departamentos';
 
   public deptos: Departamento [];
 
@@ -30,6 +27,8 @@ export class ListarDeptoComponent implements OnInit {
   }
 
   deletarDepto(id: number) {
+
+    if(window.confirm('Confirma a exclusão do registro?'))
     this.departamentoService.delete(id).subscribe({
       next: (model: any) => {
           console.log(model);
@@ -38,6 +37,6 @@ export class ListarDeptoComponent implements OnInit {
         error: (error: any) => { 
           console.log(error);
         } 
-      });
+    });
   }
 }

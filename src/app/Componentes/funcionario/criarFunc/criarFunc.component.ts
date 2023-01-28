@@ -1,10 +1,9 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { Funcionario } from 'src/app/models/Funcionario';
+import { Component, OnInit, Input } from '@angular/core';
+// importar o service
 import { FuncionarioService } from 'src/app/funcionario.service';
+// importar a classe Router
+import { Router } from '@angular/router';
 
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-criarFunc',
   templateUrl: './criarFunc.component.html',
@@ -12,65 +11,30 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class CriarFuncComponent implements OnInit {
 
-  public funcionarioForm: FormGroup;
-  public titulo = 'Funcionários';
-  public funcSelecionado: Funcionario;
-
-  public modo = 'post';
-
-  public func: Funcionario;
-
-  public funcs: Funcionario [];
-
-
-  constructor(private fb: FormBuilder, 
-              private funcionarioService: FuncionarioService
-              ) {
-                this.criarForm();
-              }
-
-  ngOnInit() {
-    //this.carregarFuncs();
+  // primeira parte -  criar uma propriedade (objeto literal) para ser o conjunto de dados que será transportado para o service e, de lá, persistido na base de dados.
+  @Input() dadosRegistro = {
+    id: 0,
+    nomeFunc: '',
+    dataContratacao: '',
+    nomeDepto: '',
+    deptoId: null
   }
 
-  criarForm() {
-    this.funcionarioForm = this.fb.group({
-      id: [''],
-      nomeFunc: ['', Validators.required],
-      dataContratacao: ['', Validators.required],
-      nomeDepto: ['', Validators.required],
-    });
-  }
-  
-  carregarFuncs() {
-    this.funcionarioService.getAll().subscribe({
-      next: (funcionarios: Funcionario[]) => {
-          this.funcs = funcionarios;
-        },
-        error: (error: any) => { } 
-      });
-  }
+  constructor(
+    // segunda parte - fazer a referência de instância do service e da classe de rotas
+    public funcionarioService: FuncionarioService,
+    public roteamento: Router
+  ) { }
 
-  salvarFunc(funcionario: Funcionario){
+  ngOnInit() { }
+  // terceira parte - criar uma função para enviar os dados capturados -  a partir da view - para o service
 
-    this.funcionarioService[this.modo](funcionario).subscribe({ 
-      next: (retorno: Funcionario[]) => {
-          console.log(retorno);
-          this.carregarFuncs();        
-        },
-        error: (error: any) => { } 
-      });
-  }
-
-  funcSubmit() {
-    console.log(this.funcionarioForm.value);
-    this.salvarFunc(this.funcionarioForm.value);
-    this.carregarFuncs();
-  }
-
-
-  funcNovo(){
-    this.funcSelecionado = new Funcionario();
-    this.funcionarioForm.patchValue(this.funcSelecionado);
+  cadastrarFunc(){
+    // chamar a injeção de dependência para enviar os dados
+    this.funcionarioService.post(this.dadosRegistro).subscribe(() => {
+      this.roteamento.navigate(['/criarDepto'])
+      window.alert('Funcionário cadastrado com sucesso!')
+      this.roteamento.navigate(['/listarFunc'])
+    })
   }
 }
