@@ -1,11 +1,9 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Funcionario } from 'src/app/models/Funcionario';
 import { FuncionarioService } from 'src/app/funcionario.service';
 
-// importes das classes necessárias para ler a variável da rota. Ex: editarDepto/1, editarDepto/3, editarDepto/5, etc.
-import { Subscription } from 'rxjs';
-import { ActivatedRoute, Params } from '@angular/router';
+// importes das classes necessárias para ler a variável da rota. Ex: editarFunc/1, editarFunc/3, editarFunc/5, etc.
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-editarFunc',
@@ -14,22 +12,14 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class EditarFuncComponent implements OnInit {
 
-  
-  public funcionarioForm: FormGroup;
-  public titulo = 'Funcionários';
-  public funcSelecionado: Funcionario;
-
-  public funcs: Funcionario [];
-
-  private routeSub: Subscription;
-    
-
-  constructor(private fb: FormBuilder,
-              private funcionarioService: FuncionarioService,
+  constructor(private funcionarioService: FuncionarioService,
+              public roteamento: Router,
               // Criação da instância da classe ActivatedRoute, por meio da variável route.
-              private route: ActivatedRoute) {
-                this.criarForm();
-              }
+              private route: ActivatedRoute) { }
+  
+  rotaCopiada = this.route.snapshot.params['id']
+  
+  funcSelecionado: Funcionario;
 
   ngOnInit() {
     
@@ -45,43 +35,25 @@ export class EditarFuncComponent implements OnInit {
     });
   }
 
-  criarForm() {
-    this.funcionarioForm = this.fb.group({
-      id: [''],
-      nomeFunc: ['', Validators.required],
-      dataContratacao: ['', Validators.required],
-      nomeDepto: ['', Validators.required],
-    });
-  }
+    // Adicionado aqui a variável idDoFunc do tipo 'number' para receber o id do departamento que foi passado pela rota editarDepto/1, editarDepto/3, editarDepto/5
+    carregarFuncs(idDoFunc: number) {
+      this.funcionarioService.getById(idDoFunc).subscribe({
+        next: (funcionarios: Funcionario) => {
+            this.funcSelecionado = funcionarios;
+          },
+          error: (error: any) => { } 
+        });
+    }
 
-   // Adicionado aqui a variável idDoDepto do tipo 'number' para receber o id do departamento que foi passado pela rota editarDepto/1, editarDepto/3, editarDepto/5
-  
-  carregarFuncs(idDoFunc: number) {
-    this.funcionarioService.getById(idDoFunc).subscribe({
-      next: (funcionarios: Funcionario) => {
-          this.funcSelecionado = funcionarios;
-        },
-        error: (error: any) => { } 
-      });
-  }
+    salvarFunc(funcionario: Funcionario) {
 
-  salvarFunc(funcionario: Funcionario){
-
-    this.funcionarioService.put(funcionario).subscribe({ 
-      next: (retorno: Funcionario) => {
-          console.log(retorno);
-          //this.carregarFuncs(idDoFunc);        
-        },
-        error: (error: any) => { } 
-      });
-  }
-
-  funcSubmit() {
-    console.log(this.funcionarioForm.value);
-    this.salvarFunc(this.funcionarioForm.value);
-  }
-
-  voltar() {
-    this.funcSelecionado = null;
-  }
+      this.funcionarioService.put(this.funcSelecionado).subscribe({
+        next: (retorno: Funcionario) => {
+            console.log(retorno);
+            window.alert('Alteração realizada com sucesso!')
+            this.roteamento.navigate(['/listarFunc'])       
+          },
+          error: (error: any) => { } 
+        });
+    }
 }
