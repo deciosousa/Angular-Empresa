@@ -18,12 +18,18 @@
     </div>
     <div class = "form-group col-sm-3 me-3">
       <label class="mt-2 mb-2" for="">Data da contratação:</label>
-      <input type = "text" [(ngModel)] = "dadosRegistro.dataContratacao" placeholder = "dd/mm/yyyy" class = "form-control" />
+      <input type = "date" [(ngModel)] = "dadosRegistro.dataContratacao" class = "form-control" />
     </div>
     <div class="col-sm-12  d-flex mt-3">
       <div class = "form-group col-sm-5 me-3 ">
-        <label for="">Nome do departamento:</label>
-        <input type = "text" [(ngModel)] = "dadosRegistro.nomeDepto" placeholder = "Insira o nome do departamento" class = "form-control mt-2" />
+        <select class="form-control" [(ngModel)] = "dadosRegistro.nomeDepto">
+          <option>--Select--</option>
+          <option *ngFor="let depto of deptos">
+            {{depto.nomeDepto}}
+          </option>
+        </select>
+        <!-- <label for="">Nome do departamento:</label>
+        <input type = "text" [(ngModel)] = "dadosRegistro.nomeDepto" placeholder = "Insira o nome do departamento" class = "form-control mt-2" /> -->
       </div>
       <div class="d-flex mt-3">
         <button class = "btn btn-sm btn-outline-dark mt-3" (click) = "cadastrarFunc()"><span class="me-2">Salvar</span>

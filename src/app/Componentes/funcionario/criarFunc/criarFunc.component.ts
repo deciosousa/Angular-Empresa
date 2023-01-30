@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 // importar o service
 import { FuncionarioService } from 'src/app/funcionario.service';
+import { DepartamentoService } from 'src/app/departamento.service';
 // importar a classe Router
 import { Router } from '@angular/router';
+
+import { Departamento } from 'src/app/models/Departamento';
 
 @Component({
   selector: 'app-criarFunc',
@@ -20,14 +23,28 @@ export class CriarFuncComponent implements OnInit {
     deptoId: null
   }
 
+  public deptos: Departamento[];
+
   constructor(
     // segunda parte - fazer a referência de instância do service e da classe de rotas
     public funcionarioService: FuncionarioService,
+    public departamentoService: DepartamentoService,
     public roteamento: Router
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.carregarDeptos();
+   }
   // terceira parte - criar uma função para enviar os dados capturados -  a partir da view - para o service
+
+  carregarDeptos(){
+    this.departamentoService.getAll().subscribe({
+      next: (departamentos: Departamento[]) => {
+          this.deptos = departamentos;
+        },
+        error: (error: any) => { } 
+      });
+  }
 
   cadastrarFunc(){
     // chamar a injeção de dependência para enviar os dados
