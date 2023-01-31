@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 
 import { Departamento } from 'src/app/models/Departamento';
 
+
 @Component({
   selector: 'app-criarFunc',
   templateUrl: './criarFunc.component.html',
@@ -50,6 +51,8 @@ export class CriarFuncComponent implements OnInit {
     // chamar a injeção de dependência para enviar os dados
     this.funcionarioService.post(this.dadosRegistro).subscribe(() => {
       this.roteamento.navigate(['/criarDepto'])
+      console.log(this.dadosRegistro);
+      
       window.alert('Funcionário cadastrado com sucesso!')
       this.roteamento.navigate(['/listarFunc'])
     })

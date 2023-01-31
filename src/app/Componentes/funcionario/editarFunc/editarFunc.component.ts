@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Funcionario } from 'src/app/models/Funcionario';
 import { FuncionarioService } from 'src/app/funcionario.service';
+import { DepartamentoService } from 'src/app/departamento.service';
+import { Departamento } from 'src/app/models/Departamento';
 
 // importes das classes necessárias para ler a variável da rota. Ex: editarFunc/1, editarFunc/3, editarFunc/5, etc.
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -13,7 +15,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 export class EditarFuncComponent implements OnInit {
 
+  public deptos: Departamento[];
+
   constructor(private funcionarioService: FuncionarioService,
+              public departamentoService: DepartamentoService,
               public roteamento: Router,
               // Criação da instância da classe ActivatedRoute, por meio da variável route.
               private route: ActivatedRoute) { }
@@ -33,6 +38,8 @@ export class EditarFuncComponent implements OnInit {
       console.log('parametros[variavelId]:' + parametros['variavelId']);
       // o valor que foi lido da rota, será passado para o método 'carregarFuncs', desse modo, this.carregarFuncs(1), this.carregarFuncs(3), this.carregarFuncs(5).  
       this.carregarFuncs(parametros['variavelId']);
+
+      this.carregarDeptos();
     });
   }
 
@@ -41,6 +48,15 @@ export class EditarFuncComponent implements OnInit {
       this.funcionarioService.getById(idDoFunc).subscribe({
         next: (funcionarios: Funcionario) => {
             this.funcSelecionado = funcionarios;
+          },
+          error: (error: any) => { } 
+        });
+    }
+
+    carregarDeptos(){
+      this.departamentoService.getAll().subscribe({
+        next: (departamentos: Departamento[]) => {
+            this.deptos = departamentos;
           },
           error: (error: any) => { } 
         });
@@ -57,4 +73,5 @@ export class EditarFuncComponent implements OnInit {
           error: (error: any) => { } 
         });
     }
+
 }
