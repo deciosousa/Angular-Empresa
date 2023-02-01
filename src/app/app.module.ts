@@ -14,6 +14,8 @@ import { ListarFuncComponent } from './Componentes/funcionario/listarFunc/listar
 import { NavComponent } from './Componentes/nav/nav.component';
 import { TituloComponent } from './Componentes/titulo/titulo.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ArrayFiltroPipe } from './arrayFiltro.pipe';
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     EditarFuncComponent,
     ListarFuncComponent,
     NavComponent,
-    TituloComponent
+    TituloComponent,
+    ArrayFiltroPipe
    ],
    
   imports: [

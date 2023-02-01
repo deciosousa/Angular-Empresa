@@ -6,6 +6,7 @@ import { ListarDeptoComponent } from './Componentes/departamento/listarDepto/lis
 import { CriarFuncComponent } from './Componentes/funcionario/criarFunc/criarFunc.component';
 import { EditarFuncComponent } from './Componentes/funcionario/editarFunc/editarFunc.component';
 import { ListarFuncComponent } from './Componentes/funcionario/listarFunc/listarFunc.component';
+import { ArrayFiltroPipe } from './arrayFiltro.pipe';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+   declarations: [ ]
 })
 export class AppRoutingModule { }
