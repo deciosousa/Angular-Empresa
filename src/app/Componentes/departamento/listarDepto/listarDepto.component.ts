@@ -16,14 +16,20 @@ import { debounceTime, fromEvent } from 'rxjs';
 export class ListarDeptoComponent implements OnInit {
 
   public deptos: Departamento [];
-  public funcs: Funcionario [];
+  public funcs: Funcionario [] = [];
   public modalRef: BsModalRef;
   public filtro = '';
+  
 
   @ViewChild('campoBusca') campoBusca: ElementRef<HTMLInputElement>;
 
 
-  openModal(template: TemplateRef<any>) {
+  // recebendo o template e o departamento selecionado, do tipo string
+  openModal(template: TemplateRef<any>, departamentoSelecionado: string) {
+    //lendo o departamento selecionado no console
+    console.log(departamentoSelecionado);
+    // o departamento selecionado é o filtro, passado como parâmetro, para carregar apenas os funcionários que pertencem ao departamento 
+    this.carregarFuncs(departamentoSelecionado);
     this.modalRef = this.modalService.show(template);
   }
 
@@ -33,7 +39,6 @@ export class ListarDeptoComponent implements OnInit {
 
   ngOnInit() {
     this.carregarDeptos();
-    this.carregarFuncs();
   }
 
   carregarDeptos() {
@@ -45,12 +50,24 @@ export class ListarDeptoComponent implements OnInit {
       });
   }
 
-  carregarFuncs() {
+  // criada o parâmetro departamentoSelecionado para que seja o filtro do método carregarFuncs e, assim, trazer apenas os funcionários do depto selecionado.
+  carregarFuncs(departamentoSelecionado: string) {
+    // se não limpar a lista, sempre que o método for executado, a lista será acumulada com os funcionários das consultas anteriores. Para ver o erro, basta comentar a linha abaixo.
+    this.funcs = [];
+    //lendo todos os funcionários
     this.funcionarioService.getAll().subscribe({
-      next: (funcionarios: Funcionario[]) => {
-          this.funcs = funcionarios;
-        },
-        error: (error: any) => { } 
+      // retornando todos os funcionários na variável 'funcionarios'
+      next: (funcionarios: Funcionario[]) => {     
+          // percorrendo a lista de funcionarios retornada item(func) a item .
+        for (var func of funcionarios) {
+          // comparando o nome do depto do funcionario para que seja adicionado na variável this.funcs 
+          if(func.nomeDepto == departamentoSelecionado) {
+          // adicionando o objeto funcionario na this.funcs que é do tipo lista/array: Funcionario[]
+            this.funcs.push(func);
+          } 
+        }
+      },
+      error: (error: any) => { } 
       });
   }
 
