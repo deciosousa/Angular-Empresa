@@ -15,6 +15,7 @@ import { NavComponent } from './Componentes/nav/nav.component';
 import { TituloComponent } from './Componentes/titulo/titulo.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ArrayFiltroPipe } from './arrayFiltro.pipe';
+import { ArrayFiltroFuncPipe } from './arrayFiltroFunc.pipe';
 
 
 
@@ -29,7 +30,8 @@ import { ArrayFiltroPipe } from './arrayFiltro.pipe';
     ListarFuncComponent,
     NavComponent,
     TituloComponent,
-    ArrayFiltroPipe
+    ArrayFiltroPipe,
+    ArrayFiltroFuncPipe
    ],
    
   imports: [
@@ -38,7 +40,7 @@ import { ArrayFiltroPipe } from './arrayFiltro.pipe';
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

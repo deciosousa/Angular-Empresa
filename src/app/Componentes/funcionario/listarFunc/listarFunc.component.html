@@ -14,7 +14,7 @@
         #campoBusca
         type="search" 
         class="form-control m-2" 
-        placeholder="Pesquisar Funcionário">
+        placeholder="Pesquisa de Funcionário">
     </div>
 <!-- ================ fim do campo de pesquisa =============== -->
   </div>
@@ -31,7 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let func of (funcs | arrayFiltro : filtro)">
+        <tr *ngFor="let func of (funcs | arrayFiltroFunc : filtro)">
           <td scope="row">{{func.id}}</td>
           <td>{{func.nomeFunc}}</td>
           <td>{{func.dataContratacao}}</td>
