@@ -31,7 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let func of (funcs | arrayFiltroFunc : filtro)">
+        <tr *ngFor="let func of (funcs | arrayFiltroFunc : filter)">
           <td scope="row">{{func.id}}</td>
           <td>{{func.nomeFunc}}</td>
           <td>{{func.dataContratacao}}</td>

@@ -8,8 +8,11 @@ import { EditarFuncComponent } from './Componentes/funcionario/editarFunc/editar
 import { ListarFuncComponent } from './Componentes/funcionario/listarFunc/listarFunc.component';
 
 
-
+//criar array e importar o 'Routes' do @angular/router
 const routes: Routes = [
+
+  //popular o array com as URL path e os respectivos componentes.
+  
   //{ path: '', redirectTo: 'nav', pathMatch: 'full' },
   { path: 'criarDepto', component: CriarDeptoComponent},
   { path: 'editarDepto', component: EditarDeptoComponent},

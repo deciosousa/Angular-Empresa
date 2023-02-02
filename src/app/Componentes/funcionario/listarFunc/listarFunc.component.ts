@@ -11,8 +11,9 @@ import { debounceTime, fromEvent } from 'rxjs';
 })
 export class ListarFuncComponent implements OnInit {
 
-  public funcs: Funcionario [];
-  public filtro = '';
+  public funcs: Funcionario [] = [];
+  //inicialização do filter, como string vazio, para evitar que seja passado para o 'arrayFiltroFunc.pipe' como undefined
+  public filter = '';
 
   @ViewChild('campoBusca') campoBusca: ElementRef<HTMLInputElement>;
 
@@ -51,7 +52,7 @@ export class ListarFuncComponent implements OnInit {
         .pipe(debounceTime(400))
         .subscribe((e: Event) => {
           const target = e.target as HTMLInputElement;
-          this.filtro = target.value;
+          this.filter = target.value;
         });
     }
 }
