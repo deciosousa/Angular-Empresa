@@ -1,15 +1,19 @@
 <div class="row">
+
   <div class="d-flex flex-row justify-content-end mt-3 mb-3">
     <label for="">voltar</label>
+    <!-- botão de voltar para o componente de lista -->
    <a [routerLink]="['/listarFunc']" class="btn btn-sm btn-white">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
     </svg>
    </a>
   </div>
+  
   <div  *ngIf="funcSelecionado">
     <app-titulo  [titulo]="(funcSelecionado.id == 0 ? 'Novo Funcionário' : 'Código do Funcionário: ' + funcSelecionado.id)">
     </app-titulo>
+    <!-- form com os dados do registro. A diretiva [(ngModel)] é a responsável pelo fluxo bidirecional, ou seja, enviar dados do template Html para o componente .ts e também por recebê-los  -->
     <div class="col-sm-12 mt-3">
       <div class = "form-group col-sm-8 me-3">
         <label class="mb-2" for="">Nome Completo:</label>
@@ -24,6 +28,7 @@
           <label for="">Nome do departamento:</label>
           <select class="form-control mt-2" [(ngModel)] = "funcSelecionado.nomeDepto">
             <option>--Select--</option>
+             <!-- criando uma diretiva ngFor para iterar sobre os valores contidos na variável 'deptos' (property binding) e exibir cada item no select da view. -->
             <option *ngFor="let depto of deptos" value = {{depto.nome}}>
               {{depto.nome}}
             </option>
@@ -31,6 +36,7 @@
         </div>
       </div>
       <div class="d-flex form-group mt-3">
+        <!-- construindo o evento de chamada do método de salvar alterações no registro.)-->
         <button class = "btn btn-sm btn-outline-dark mt-3" (click) = "salvarFunc()"><span class="me-2">Salvar</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-check-fill" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>

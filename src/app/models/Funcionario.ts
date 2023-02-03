@@ -1,13 +1,8 @@
 import { Departamento } from "./Departamento";
 
+// definir as propriedades e os respectivos tipos, dos dados que circulam pela aplicação
 export class Funcionario {
 
-  constructor() {
-  this.id = 0;
-  this.nomeFunc = '';
-  this.dataContratacao = '';
-  this.nomeDepto = '';   
-  }
   id: number;
   nomeFunc: string;
   dataContratacao: string;

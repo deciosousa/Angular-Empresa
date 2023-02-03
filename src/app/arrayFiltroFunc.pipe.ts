@@ -10,5 +10,4 @@ export class ArrayFiltroFuncPipe implements PipeTransform {
       return value.filter((x:any) => x.nomeFunc.toLowerCase().startsWith(term.toLowerCase()) || x.nomeDepto.toLowerCase().startsWith(term.toLowerCase()))
       
     } 
-
 }

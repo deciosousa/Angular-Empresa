@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-// importar o service
+//importando o service, que contém os métodos de requisições Http
 import { DepartamentoService } from 'src/app/departamento.service';
-// importar a classe Router
+// importe da classe necessária para gerar o roteamento a partir deste componente
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,25 +11,28 @@ import { Router } from '@angular/router';
 })
 export class CriarDeptoComponent implements OnInit {
 
-  // primeira parte -  criar uma propriedade (objeto literal) para ser o conjunto de dados que será transportado para o service e, de lá, persistido na base de dados.
+  // criando uma propriedade (objeto literal) para ser o conjunto de dados que será transportado para o service e, de lá, persistido na base de dados.
   @Input() dadosRegistro = {
     id: 0,
     nome: ''
   }
 
+   //criando as referências de instância do departamentoService e da classe de rotas 'Router'.
   constructor(
-    // segunda parte - fazer a referência de instância do service e da classe de rotas
     public departamentoService: DepartamentoService,
     public roteamento: Router
   ) { }
 
   ngOnInit() { }
-  // terceira parte - criar uma função para enviar os dados capturados -  a partir da view - para o service
+
+  // criando uma função para, por meio da injeção de dependência, enviar os dados capturados -  a partir da view - para o service
   cadastrarDepto(){
-    // chamar a injeção de dependência para enviar os dados
+  
+    //acessando o método post do service, para requisitar a criação de um registro. 
     this.departamentoService.post(this.dadosRegistro).subscribe(() => {
-      this.roteamento.navigate(['/criarDepto'])
+      //informando ao usuário sobre o sucesso da alteração.
       window.alert('Departamento cadastrado com sucesso!')
+      //redirecionando o usuário para a view do componente de lista.
       this.roteamento.navigate(['/listarDepto'])
     })
   }

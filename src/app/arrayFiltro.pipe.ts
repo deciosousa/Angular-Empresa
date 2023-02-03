@@ -13,8 +13,7 @@ export class ArrayFiltroPipe implements PipeTransform {
             a.nome.toUpperCase().indexOf(filtro) >= 0
         );
     } else {
-        // Quando filtro for vazio ou nulo,
-        // retornamos o próprio array
+        // Quando filtro for vazio ou nulo, o próprio array é retornado.
         return value;
     }
   }

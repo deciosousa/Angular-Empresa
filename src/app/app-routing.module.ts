@@ -17,16 +17,18 @@ const routes: Routes = [
   { path: 'criarDepto', component: CriarDeptoComponent},
   { path: 'editarDepto', component: EditarDeptoComponent},
   
-  //publicada a rota editarDepto/1, editarDepto/3, editarDepto/5 etc para tornar conhecida + declaração da variável id. A variável id deve ser definida com :id
+  //publicar a rota editarDepto e atribuir a ela um parâmetro chamado 'variavelId'. A variável id deve ser definida com :id
   { path: 'editarDepto/:variavelId', component: EditarDeptoComponent},
   { path: 'listarDepto', component: ListarDeptoComponent},
   { path: 'criarFunc', component: CriarFuncComponent },
   { path: 'editarFunc', component: EditarFuncComponent},
+  //publicar a rota editarFunc e atribuir a ela um parâmetro chamado 'variavelId'. A variável id deve ser definida com :id
   { path: 'editarFunc/:variavelId', component: EditarFuncComponent},
   { path: 'listarFunc', component: ListarFuncComponent},
 
 ];
 
+// registrar as rotas para dizer ao Angular que elas devem ser usadas
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
